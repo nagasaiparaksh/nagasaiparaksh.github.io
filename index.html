@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Y Naga Sai Paraksh · AI/ML Engineer</title>
+<meta name="description" content="AI/ML engineer building LLM agents, RAG systems and prompt tooling. IEEE Vortex Hackathon finalist. B.Tech CSE at SRM Institute of Science and Technology.">
+<meta property="og:title" content="Y Naga Sai Paraksh · AI/ML Engineer">
+<meta property="og:description" content="LLM agents, RAG systems and prompt tooling, built end to end.">
+<meta name="theme-color" content="#07070a">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307070a'/%3E%3Cpath d='M16 20l16 12-16 12' fill='none' stroke='%23c778dd' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M36 46h14' stroke='%23c778dd' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#07070a; --panel:#0d0d11; --ink:#ececf0; --mut:#abb2bf; --line:#3a3a44; --line2:#1a1a20;
+  --acc:#c778dd; --acc-fill:#c778dd; --on-acc:#0a0a0c; --dot:rgba(255,255,255,.25);
+  --mono:"Fira Code",ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,monospace;
+  --w:1080px;
+}
+[data-theme=light]{
+  --bg:#f6f4f8; --panel:#ffffff; --ink:#15121a; --mut:#5b5566; --line:#cfc9d6; --line2:#e6e2ea;
+  --acc:#8a2fa8; --acc-fill:#8a2fa8; --on-acc:#ffffff; --dot:rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 var(--mono);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--acc);color:var(--on-acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 28px;position:relative}
+.acc{color:var(--acc)}
+
+/* left social rail */
+.rail{position:fixed;left:26px;top:0;z-index:25;display:flex;flex-direction:column;align-items:center;gap:14px}
+.rail::before{content:"";width:1px;height:96px;background:var(--line)}
+.rail a{color:var(--mut);display:block;width:20px;height:20px}
+.rail a:hover{color:var(--acc)}
+.rail svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rail::after{content:"";width:1px;height:120px;background:var(--line)}
+
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.logo{white-space:nowrap;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:15px}
+.logo b{color:var(--acc)}
+.links{display:flex;gap:22px;margin-left:auto;margin-right:18px}
+.links a{font-size:13.5px;color:var(--mut);text-decoration:none}
+.links a::before{content:"#";color:var(--acc)}
+.links a:hover,.links a.on{color:var(--ink)}
+.tools{display:flex;gap:8px}
+.ib{font:12px var(--mono);color:var(--mut);background:transparent;border:1px solid var(--line);padding:4px 10px;cursor:pointer}
+.ib:hover{color:var(--ink);border-color:var(--acc)}
+kbd{font:11px var(--mono);border:1px solid var(--line);padding:0 5px;color:var(--mut)}
+
+/* hero */
+.hero{padding:70px 0 60px}
+.hero .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center}
+h1{font:600 clamp(28px,4.2vw,42px)/1.25 var(--mono);margin:0 0 22px;letter-spacing:-.02em}
+.sub{color:var(--mut);max-width:46ch;margin:0 0 28px}
+.sub .typed{color:var(--ink)}
+.caret{display:inline-block;width:8px;height:1em;background:var(--acc);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 13.5px var(--mono);text-decoration:none;padding:9px 16px;border:1px solid var(--acc);color:var(--ink);background:transparent;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--acc-fill);color:var(--on-acc)}
+.btn.s{border-color:var(--line)}
+.btn.s:hover{border-color:var(--acc);background:transparent;color:var(--acc)}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+
+.pic{position:relative;max-width:400px;margin-left:auto;width:100%;aspect-ratio:1/1.05}
+.pic::before{content:"";position:absolute;right:-18px;bottom:-26px;width:46%;height:46%;
+  background-image:radial-gradient(var(--dot) 1.4px,transparent 1.5px);background-size:11px 11px;opacity:.8}
+.pic::after{content:"";position:absolute;left:-14px;top:-14px;width:36%;height:36%;border-left:1px solid var(--line);border-top:1px solid var(--line)}
+.pic .ph{position:absolute;inset:0;isolation:isolate;mix-blend-mode:screen;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 54% 56% at 50% 44%,#000 38%,transparent 100%);
+  mask-image:radial-gradient(ellipse 54% 56% at 50% 44%,#000 38%,transparent 100%)}
+.pic img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block;filter:grayscale(1) contrast(1.25) brightness(.72)}
+.pic .tint{position:absolute;inset:0;background:var(--acc);mix-blend-mode:multiply;opacity:.5}
+[data-theme=light] .pic .ph{mix-blend-mode:multiply}
+[data-theme=light] .pic .tint{opacity:.28}
+[data-theme=light] .pic img{filter:grayscale(1) contrast(1.1) brightness(1)}
+.pic .mono-fb{position:absolute;inset:0;display:none;place-items:center;font:800 110px var(--mono);color:var(--line)}
+.pic.nophoto .ph{display:none}.pic.nophoto .mono-fb{display:grid}
+.pic .now{position:absolute;left:0;bottom:-8px;display:flex;align-items:center;gap:10px;font-size:12.5px;border:1px solid var(--line);background:var(--bg);padding:6px 12px}
+.pic .now i{width:10px;height:10px;background:var(--acc);display:block;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+
+/* quote */
+.quote{position:relative;max-width:520px;margin:38px auto 0;border:1px solid var(--line);padding:22px 26px;text-align:center}
+.quote::before,.quote::after{content:"\201C";position:absolute;top:-18px;left:16px;background:var(--bg);padding:0 8px;font:700 38px/1 var(--mono);color:var(--acc)}
+.quote::after{content:"\201D";top:auto;left:auto;right:16px;bottom:-20px}
+.quote p{margin:0;font-size:15px}
+.quote small{display:inline-block;margin-top:12px;border:1px solid var(--line);padding:2px 12px;color:var(--mut);font-size:12.5px}
+
+/* section heads */
+section{padding:64px 0;position:relative}
+.h{display:flex;align-items:center;gap:16px;margin:0 0 30px}
+.h h2{font:500 clamp(20px,3vw,26px) var(--mono);margin:0;white-space:nowrap}
+.h h2::before{content:"#";color:var(--acc)}
+.h .ln{flex:1;height:1px;background:var(--acc);opacity:.7;max-width:360px}
+.h a{margin-left:auto;font-size:13.5px;text-decoration:none;white-space:nowrap}
+.h a:hover{color:var(--acc)}
+.rv{transition:opacity .5s ease,transform .5s ease}
+.js .rv{opacity:0;transform:translateY(12px)}
+.js .rv.in{opacity:1;transform:none}
+
+/* project cards */
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.pc{border:1px solid var(--line);display:flex;flex-direction:column;transition:border-color .2s,transform .2s;background:var(--panel)}
+.pc:hover{border-color:var(--acc);transform:translateY(-3px)}
+.thumb{height:128px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 4px;align-content:center;justify-content:center;padding:14px;
+  background-image:radial-gradient(var(--line) 1px,transparent 1.2px);background-size:14px 14px;font-size:11.5px}
+.thumb span{border:1px solid var(--line);background:var(--bg);padding:1px 7px;color:var(--ink)}
+.thumb i{font-style:normal;color:var(--acc);align-self:center}
+.pc .bd{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc .tg{font-size:12px;color:var(--mut)}
+.pc h3{font:600 17px/1.3 var(--mono);margin:0}
+.pc p{margin:0;color:var(--mut);font-size:13.5px;line-height:1.6}
+.pc .ft{margin-top:auto;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pc .btn{padding:5px 12px;font-size:12.5px}
+.badge{font-size:11px;color:var(--on-acc);background:var(--acc-fill);padding:1px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+
+/* experience / research */
+.tl{margin:0;padding:0 0 0 22px;list-style:none;border-left:1px solid var(--line)}
+.tl>li{position:relative;padding:0 0 30px}.tl>li:last-child{padding-bottom:0}
+.tl>li::before{content:"";position:absolute;left:-27px;top:7px;width:9px;height:9px;background:var(--acc)}
+.tl h3{font:600 16.5px var(--mono);margin:0}
+.tl .meta{font-size:12.5px;color:var(--mut);margin:2px 0 8px}
+.tl ul,.rs ul{margin:0;padding-left:18px;color:var(--mut);font-size:14px}
+.tl li li{padding-bottom:3px}
+.rs{border:1px solid var(--line);background:var(--panel);padding:22px 24px}
+.rs h3{font:600 17px/1.35 var(--mono);margin:0 0 4px}
+.rs .by{color:var(--mut);font-size:13px;margin:0 0 12px}
+.rs ul{margin:0 0 14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.tag{font-size:12px;border:1px solid var(--line);padding:1px 9px;color:var(--mut)}
+
+/* skills tiles */
+.tiles{display:grid;grid-template-columns:repeat(8,1fr);gap:16px}
+.tile{border:1px solid var(--line);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:.2s;background:var(--panel)}
+.tile:hover{border-color:var(--acc);transform:translateY(-3px)}
+.tile svg{width:40px;height:40px;color:var(--ink)}
+.tile b{font:700 20px var(--mono);color:var(--acc);letter-spacing:-.04em}
+.tile span{font-size:11.5px;color:var(--mut);text-align:center;padding:0 4px}
+
+.duo{display:grid;grid-template-columns:1fr 1.3fr;gap:22px;margin-top:34px}
+.box{border:1px solid var(--line);padding:20px 22px;background:var(--panel)}
+.box h3{font:500 14px var(--mono);margin:0 0 14px}
+.box h3::before{content:"#";color:var(--acc)}
+.lc .big{font:800 42px/1 var(--mono)}
+.lc .sm{font-size:12.5px;color:var(--mut);margin:4px 0 14px}
+.bars{display:grid;gap:8px;margin:0 0 16px}
+.bar-r{display:grid;grid-template-columns:56px 1fr 38px;gap:10px;align-items:center;font-size:12px;color:var(--mut)}
+.bar-r div{height:6px;background:var(--line2);border:1px solid var(--line)}
+.bar-r div i{display:block;height:100%;background:var(--acc)}
+.certs ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.certs li a,.certs li .c2{display:flex;justify-content:space-between;gap:12px;text-decoration:none;font-size:13.5px;border:1px solid var(--line);padding:10px 14px;background:var(--bg)}
+.certs li a:hover{border-color:var(--acc);color:var(--acc)}
+.certs small{color:var(--mut)} .certs .go{color:var(--acc);white-space:nowrap}
+
+/* about */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.about p{margin:0 0 14px;color:var(--mut)}.about b{color:var(--ink);font-weight:600}
+.ill{border:1px solid var(--line);background:var(--panel);padding:22px;font-size:12.5px;line-height:1.8;position:relative}
+.ill::before{content:"";position:absolute;left:-12px;bottom:-12px;width:40%;height:40%;background-image:radial-gradient(var(--dot) 1.4px,transparent 1.5px);background-size:11px 11px;z-index:-1}
+.ill .k{color:var(--acc)}.ill .c{color:var(--mut)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start}
+.contact p{color:var(--mut);margin:0 0 16px;max-width:50ch}
+.msg{border:1px solid var(--line);padding:18px 20px;background:var(--panel)}
+.msg h3{font:500 14px var(--mono);margin:0 0 12px}
+.msg a,.msg button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:13.5px var(--mono);text-decoration:none;padding:6px 0;cursor:pointer;word-break:break-all}
+.msg a:hover,.msg button:hover{color:var(--acc)}
+.msg svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mut);font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* edge decorations */
+.deco{position:absolute;pointer-events:none;border:1px solid var(--line)}
+.deco.a{right:0;top:230px;width:44px;height:90px;border-right:0}
+.deco.b{left:0;top:760px;width:44px;height:70px;border-left:0}
+.dots{position:absolute;pointer-events:none;width:70px;height:70px;background-image:radial-gradient(var(--dot) 1.4px,transparent 1.5px);background-size:12px 12px;opacity:.7}
+
+.pal{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--bg) 75%,transparent);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+.pal.open{display:flex}
+.pal .bx{width:min(560px,92vw);background:var(--panel);border:1px solid var(--acc);overflow:hidden}
+.pal input{width:100%;background:none;border:0;border-bottom:1px solid var(--line);outline:0;color:var(--ink);font:15px var(--mono);padding:16px 18px}
+.pal ul{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
+.pal li{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;font-size:13.5px;cursor:pointer}
+.pal li span{color:var(--mut)}
+.pal li[aria-selected=true]{background:var(--acc-fill);color:var(--on-acc)}
+.pal li[aria-selected=true] span{color:var(--on-acc);opacity:.75}
+.pal .none{padding:16px;color:var(--mut);font-size:13px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:13px;padding:8px 16px;z-index:60}
+
+@media(max-width:1180px){.rail{display:none}}
+@media(max-width:900px){
+  .hero{padding:34px 0 40px}.hero .grid,.about,.contact,.duo{grid-template-columns:1fr}
+  .pic{margin:0 auto;max-width:320px;order:-1}
+  .links{display:none}section{padding:46px 0}.logo{font-size:13px}.ib kbd{display:none}
+  .pgrid{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.tile svg{width:28px;height:28px}.tile span{font-size:10px}
+  .h a{display:none}.deco,.dots{display:none}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv,.pc,.tile{transition:none}.js .rv{opacity:1;transform:none}.caret,.pic .now i{animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Social links">
+  <a href="https://github.com/nagasaiparaksh" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5c0-1 .1-1.4-.5-2 2.800-.3 5.500-1.400 5.500-6a4.600 4.600 0 0 0-1.300-3.200 4.200 4.200 0 0 0-.1-3.200s-1.100-.3-3.500 1.300a12 12 0 0 0-6.200 0C6.500 2.800 5.400 3.100 5.400 3.100a4.200 4.200 0 0 0-.1 3.200A4.600 4.600 0 0 0 4 9.500c0 4.600 2.700 5.700 5.500 6-.6.600-.6 1.200-.5 2V21"/></svg></a>
+  <a href="https://linkedin.com/in/nagasaiparaksh" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a>
+  <a href="mailto:nagasaiparaksh@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
+  <a id="railLc" href="#" target="_blank" rel="noopener" aria-label="LeetCode" hidden><svg viewBox="0 0 24 24"><path d="M16 4 5 15a3 3 0 0 0 0 4 3 3 0 0 0 4 0l3-3M13 8l3-3M9 13h11"/></svg></a>
+</nav>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Home"><b>&lt;/&gt;</b> naga-sai-paraksh</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#top">home</a><a href="#projects">projects</a><a href="#experience">experience</a><a href="#skills">skills</a><a href="#about">about-me</a><a href="#contact">contacts</a>
+    </nav>
+    <div class="tools">
+      <button class="ib" id="palBtn" aria-label="Open command menu"><kbd>/</kbd> menu</button>
+      <button class="ib" id="themeBtn" aria-label="Switch to light theme">light</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <i class="deco a"></i><i class="deco b"></i>
+  <div class="hero">
+    <div class="grid">
+      <div>
+        <h1>Hi, I'm Naga Sai Paraksh, an <span class="acc">AI/ML engineer</span> and <span class="acc">LLM systems</span> builder</h1>
+        <p class="sub">I turn messy workflows into working LLM systems: <span class="typed" id="typed">multi-agent automation</span><span class="caret" aria-hidden="true"></span><br>End to end, from data and model to API.</p>
+        <div class="cta">
+          <a class="btn" href="#projects">view projects &darr;</a>
+          <a class="btn s" href="https://drive.google.com/file/d/1crU9QvTZEbWiPV8KwsoHubkrKpnWQCfv/view?usp=drive_link" target="_blank" rel="noopener">resume &nearr;</a>
+        </div>
+      </div>
+      <div class="pic" id="pic">
+        <div class="ph"><img src="photo.jpg" alt="Portrait of Y Naga Sai Paraksh" id="photo"><div class="tint"></div></div>
+        <div class="mono-fb" aria-hidden="true">NSP</div>
+        <div class="now"><i></i>Open to work</div>
+      </div>
+    </div>
+    <div class="quote rv">
+      <p>Anyone can demo a model.<br>The hard part is a system you can trust.</p>
+      <small>- my rule of thumb</small>
+    </div>
+  </div>
+</div>
+
+<section id="projects"><div class="wrap">
+  <div class="h rv"><h2>projects</h2><span class="ln"></span><a href="https://github.com/nagasaiparaksh?tab=repositories" target="_blank" rel="noopener">view all ~~&gt;</a></div>
+  <div class="pgrid">
+    <article class="pc rv">
+      <div class="thumb"><span>invoice</span><i>&rarr;</i><span>risk</span><i>&rarr;</i><span>policy RAG</span><i>&rarr;</i><span>draft</span><i>&rarr;</i><span>QA gate</span><i>&rarr;</i><span>approve</span></div>
+      <div class="bd">
+        <div class="tg">Python LangGraph RAG Ollama SQLite</div>
+        <h3>AI Collections Communication Agent</h3>
+        <p>Writes personalised overdue-invoice emails, SMS and call notes. A multi-agent workflow with a quality gate, running on a local LLM with draft caching so financial data stays in-house.</p>
+        <div class="ft"><a class="btn" href="https://github.com/nagasaiparaksh/ai-collections-agent" target="_blank" rel="noopener">source &lt;~&gt;</a></div>
+      </div>
+    </article>
+    <article class="pc rv">
+      <div class="thumb"><span>upload</span><i>&rarr;</i><span>chunk</span><i>&rarr;</i><span>embed</span><i>&rarr;</i><span>FAISS</span><i>&rarr;</i><span>retrieve</span><i>&rarr;</i><span>cited answer</span></div>
+      <div class="bd">
+        <div class="tg">Python LangChain FAISS ChromaDB Ollama</div>
+        <h3>LLM-Powered Document Search (RAG)</h3>
+        <p>Ask in plain language and get answers grounded in your own documents, each traceable to a file and page. PDF upload to searchable index is fully automatic.</p>
+        <div class="ft"><a class="btn" href="https://github.com/nagasaiparaksh/llm-document-search-rag" target="_blank" rel="noopener">source &lt;~&gt;</a></div>
+      </div>
+    </article>
+    <article class="pc rv">
+      <div class="thumb"><span>task</span><i>&rarr;</i><span>generate</span><i>&rarr;</i><span>evaluate</span><i>&rarr;</i><span>refine</span><i>&rarr;</i><span>best prompt</span></div>
+      <div class="bd">
+        <div class="tg">Python Ollama FastAPI LLMs</div>
+        <h3>AI Prompt Craft <span class="badge">IEEE Vortex finalist</span></h3>
+        <p>Generates, refines and evaluates prompts automatically with open-source LLMs, ending the trial and error. Packaged as an API. Finalist among 200+ teams.</p>
+        <div class="ft"><a class="btn" href="https://github.com/nagasaiparaksh/ai-prompt-craft" target="_blank" rel="noopener">source &lt;~&gt;</a></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <div class="h rv"><h2>experience</h2><span class="ln"></span></div>
+  <ol class="tl rv">
+    <li>
+      <h3>Artificial Intelligence Intern &middot; Upsta Analytics</h3>
+      <div class="meta">Jul 2026 &ndash; Oct 2026 &middot; remote</div>
+      <ul>
+        <li>Engineered LLM-powered agents for financial automation, including AR reconciliation and cash-flow forecasting.</li>
+        <li>Built document pipelines that extract, validate and compare data from invoices and bank statements.</li>
+        <li>Designed transaction-matching workflows (1:1, 1:N, N:1, N:N) with confidence scores and discrepancy detection.</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Machine Learning Research Intern &middot; IIIT Allahabad</h3>
+      <div class="meta">May 2025 &ndash; Jul 2025 &middot; Uttar Pradesh, India</div>
+      <ul>
+        <li>Developed multimodal ML pipelines for fake-news detection with Python and PyTorch.</li>
+        <li>Created reusable modules for preprocessing, feature engineering and automated model evaluation.</li>
+        <li>Optimised training with Automatic Mixed Precision (AMP), improving efficiency and cutting training time.</li>
+      </ul>
+    </li>
+  </ol>
+</div></section>
+
+<section id="research"><div class="wrap">
+  <div class="h rv"><h2>research</h2><span class="ln"></span></div>
+  <article class="rs rv">
+    <h3>Terrain-Robust Camouflaged Object Detection with a Frozen SAM</h3>
+    <p class="by">With K. S. S. Tanwar, guided by Dr. MenagaDevi S. &middot; under review</p>
+    <ul>
+      <li>Found that camouflage detectors trained on one terrain (forest) lose accuracy in another (desert, snow): a real risk for border surveillance and search-and-rescue that standard benchmarks rarely measure.</li>
+      <li>Proposed a <b>leave-one-terrain-out</b> evaluation with two new metrics, <b>terrain gap</b> and <b>recovery ratio</b>, so cross-terrain reliability can be compared fairly.</li>
+      <li>Built a colour-camera-only detector that adapts to new terrain and double-checks its own uncertain predictions, usable on standard field cameras without depth or thermal sensors.</li>
+    </ul>
+    <p class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">SAM</span><span class="tag">LoRA</span><span class="tag">Wavelet Transforms</span></p>
+  </article>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="h rv"><h2>skills</h2><span class="ln"></span></div>
+  <div class="tiles rv" id="tiles"></div>
+  <div class="duo rv">
+    <div class="box lc" id="lcCard" hidden>
+      <h3>leetcode</h3>
+      <div class="big" id="lcSolved">0</div>
+      <div class="sm">problems solved</div>
+      <div class="bars" id="lcBars"></div>
+      <a class="btn" id="lcLink" href="#" target="_blank" rel="noopener">view profile &nearr;</a>
+    </div>
+    <div class="box certs">
+      <h3>certifications</h3>
+      <ul id="certList"></ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <div class="h rv"><h2>about-me</h2><span class="ln"></span></div>
+  <div class="about rv">
+    <div>
+      <p>Hello, I'm Naga. I'm an <b>AI/ML-focused CS undergraduate</b> at SRM Institute of Science and Technology (B.Tech CSE, 9.4 CGPA, graduating May 2027), based in Bangalore.</p>
+      <p>I like problems where the data is messy and the stakes are real: financial reconciliation, document lookup, prompt quality. I recently finished an AI internship at <b>Upsta Analytics</b> building LLM agents for financial automation, and before that did multimodal ML research at <b>IIIT Allahabad</b>.</p>
+      <p>I care about systems that keep sensitive data local, keep answers traceable, and put quality gates around model output. My prompt-optimisation platform made me an <b>IEEE Vortex Hackathon finalist</b> among 200+ teams. I'm also solid on core CS: DSA, OOP, DBMS, OS and networks.</p>
+      <a class="btn" href="https://drive.google.com/file/d/1crU9QvTZEbWiPV8KwsoHubkrKpnWQCfv/view?usp=drive_link" target="_blank" rel="noopener">read more &darr;</a>
+    </div>
+    <div class="ill">
+<span class="c">$</span> cat profile.yml<br>
+<span class="k">name</span>: Y Naga Sai Paraksh<br>
+<span class="k">education</span>: SRM IST, B.Tech CSE<br>
+<span class="k">previous</span>: AI Intern, Upsta<br>
+<span class="k">won</span>: IEEE Vortex finalist<br>
+<span class="k">focus</span>: LLM agents, RAG<br>
+<span class="k">status</span>: open to work<br>
+<span class="c">$</span> <span class="caret" style="width:8px"></span>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="h rv"><h2>contacts</h2><span class="ln"></span></div>
+  <div class="contact rv">
+    <p>I'm open to AI/ML, GenAI, data science and software roles. If you're building something with LLMs, or just want to talk shop, write to me.</p>
+    <div class="msg">
+      <h3>Message me here</h3>
+      <a href="mailto:nagasaiparaksh@gmail.com"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>nagasaiparaksh@gmail.com</a>
+      <button id="copyMail" type="button"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>copy email</button>
+      <a href="https://linkedin.com/in/nagasaiparaksh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>linkedin.com/in/nagasaiparaksh</a>
+      <a href="https://github.com/nagasaiparaksh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5c0-1 .1-1.4-.5-2 2.800-.3 5.500-1.400 5.500-6a4.600 4.600 0 0 0-1.300-3.200 4.200 4.200 0 0 0-.1-3.200s-1.100-.3-3.500 1.300a12 12 0 0 0-6.200 0C6.500 2.800 5.400 3.100 5.400 3.100a4.200 4.200 0 0 0-.1 3.200A4.600 4.600 0 0 0 4 9.500c0 4.600 2.700 5.700 5.500 6-.6.600-.6 1.200-.5 2V21"/></svg>github.com/nagasaiparaksh</a>
+      <a id="lcBtn" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24"><path d="M16 4 5 15a3 3 0 0 0 0 4 3 3 0 0 0 4 0l3-3M13 8l3-3M9 13h11"/></svg><span id="lcText">leetcode</span></a>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 Y Naga Sai Paraksh</span><span>hand-built, no frameworks &middot; press <kbd>/</kbd> for the menu</span></div></footer>
+
+<div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Command menu">
+  <div class="bx">
+    <input id="palIn" type="text" placeholder="Type a command or section…" autocomplete="off" spellcheck="false" aria-label="Search commands">
+    <ul id="palList" role="listbox"></ul>
+  </div>
+</div>
+
+<script>
+/* ===== EDIT ME ===== */
+const CONFIG={
+  leetcode:{ user:"ynagasaiparaksh", solved:0, easy:0, medium:0, hard:0 },   // e.g. user:"yourname", solved:312, easy:120, medium:160, hard:32
+  certs:[
+    {name:"AWS Generative AI Practitioner", issuer:"AWS", url:"https://drive.google.com/file/d/17gMixHTIwDqns3diwF263S5BQrSII3zy/view?usp=sharing"},
+    {name:"Introduction to Machine Learning", issuer:"NPTEL", url:"https://drive.google.com/file/d/1bJlKE7wEJpuiT7PTvZRD_KaL8FsxxxCM/view?usp=sharing"},
+    {name:"Database Management Systems", issuer:"NPTEL", url:"https://drive.google.com/file/d/1Lg4vT7_6p8yRsxwRrG_eqz1V6vFhnq_F/view?usp=drive_link"}
+  ]
+};
+/* =================== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const root=document.documentElement;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function setTheme(t){
+  root.dataset.theme=t;
+  $('#themeBtn').textContent=t==='dark'?'light':'dark';
+  $('#themeBtn').setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' theme');
+  $('meta[name=theme-color]').setAttribute('content',t==='dark'?'#07070a':'#f6f4f8');
+  try{localStorage.setItem('theme',t)}catch(e){}
+}
+let saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
+setTheme(saved||'dark');
+$('#themeBtn').onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
+
+const photo=$('#photo');
+function noPhoto(){$('#pic').classList.add('nophoto')}
+photo.addEventListener('error',noPhoto);
+if(photo.complete&&photo.naturalWidth===0)noPhoto();
+
+/* skills tiles */
+const ICONS={"Python": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#3776AB\" d=\"M11.858 0c-.978.005-1.913.088-2.736.234C6.7.662 6.26 1.558 6.26 3.21v2.182h5.725v.727H4.111c-1.664 0-3.121 1-3.577 2.903-.526 2.181-.549 3.542 0 5.82.407 1.694 1.379 2.902 3.043 2.902h1.969v-2.616c0-1.89 1.635-3.557 3.576-3.557h5.72c1.591 0 2.862-1.31 2.862-2.91v-5.45c0-1.553-1.309-2.718-2.863-2.977A18 18 0 0 0 11.858 0M8.762 1.755c.591 0 1.074.491 1.074 1.095 0 .601-.483 1.087-1.074 1.087A1.08 1.08 0 0 1 7.688 2.85c0-.604.48-1.095 1.074-1.095m9.656 4.364v2.543c0 1.971-1.671 3.63-3.577 3.63H9.122c-1.566 0-2.862 1.34-2.862 2.91v5.452c0 1.551 1.349 2.464 2.862 2.91 1.813.532 3.55.628 5.72 0 1.44-.418 2.862-1.258 2.862-2.91V18.47h-5.719v-.727h8.582c1.664 0 2.284-1.16 2.862-2.903.598-1.793.573-3.518 0-5.819-.41-1.656-1.196-2.903-2.862-2.903zm-3.216 13.807a1.08 1.08 0 0 1 1.074 1.088c0 .604-.48 1.094-1.074 1.094-.592 0-1.075-.49-1.075-1.094 0-.601.483-1.088 1.075-1.088\"/></svg>", "PyTorch": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#EE4C2C\" d=\"M12.005 0L4.952 7.053a9.865 9.865 0 000 14.022 9.866 9.866 0 0014.022 0c3.984-3.9 3.986-10.205.085-14.023l-1.744 1.743c2.904 2.905 2.904 7.634 0 10.538s-7.634 2.904-10.538 0-2.904-7.634 0-10.538l4.647-4.646.582-.665zm3.568 3.899a1.327 1.327 0 00-1.327 1.327 1.327 1.327 0 001.327 1.328A1.327 1.327 0 0016.9 5.226 1.327 1.327 0 0015.573 3.9z\"/></svg>", "TensorFlow": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#FF6F00\" d=\"M1.292 5.856L11.54 0v24l-4.095-2.378V7.603l-6.168 3.564.015-5.31zm21.43 5.311l-.014-5.31L12.46 0v24l4.095-2.378V14.87l3.092 1.788-.018-4.618-3.074-1.756V7.603l6.168 3.564z\"/></svg>", "scikit-learn": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#F7931E\" d=\"M15.601 5.53c-1.91.035-3.981.91-5.63 2.56-2.93 2.93-2.083 8.53-1.088 9.525.805.804 6.595 1.843 9.526-1.088a9.74 9.74 0 0 0 .584-.643c.043-.292.205-.66.489-1.106a1.848 1.848 0 0 1-.537.176c-.144.265-.37.55-.676.855-.354.335-.607.554-.76.656a.795.795 0 0 1-.437.152c-.35 0-.514-.308-.494-.924-.22.316-.425.549-.612.7a.914.914 0 0 1-.578.224c-.194 0-.36-.09-.496-.273a1.03 1.03 0 0 1-.193-.507 4.016 4.016 0 0 1-.726.583c-.224.132-.47.197-.74.197-.3 0-.543-.096-.727-.288a.978.978 0 0 1-.257-.524v.004c-.3.276-.564.48-.79.611a1.295 1.295 0 0 1-.649.197.693.693 0 0 1-.571-.275c-.145-.183-.218-.43-.218-.739 0-.464.101-1.02.302-1.67.201-.65.445-1.25.733-1.797l.842-.312a.21.21 0 0 1 .06-.013c.063 0 .116.047.157.14.04.095.061.221.061.38 0 .451-.104.888-.312 1.31-.207.422-.532.873-.974 1.352-.018.23-.027.388-.027.474 0 .193.036.345.106.458.071.113.165.169.282.169a.71.71 0 0 0 .382-.13c.132-.084.333-.26.602-.523.028-.418.187-.798.482-1.142.324-.38.685-.569 1.08-.569.206 0 .37.054.494.16a.524.524 0 0 1 .186.417c0 .458-.486.829-1.459 1.114.088.43.32.646.693.646a.807.807 0 0 0 .417-.117c.129-.076.321-.243.575-.497.032-.252.118-.495.259-.728.182-.3.416-.544.701-.73.285-.185.537-.278.756-.278.276 0 .47.127.58.381l.677-.374h.186l-.292.971c-.15.488-.226.823-.226 1.004 0 .19.067.285.202.285.086 0 .181-.045.285-.137.104-.092.25-.232.437-.42v.001c.143-.155.274-.32.392-.494-.19-.084-.285-.21-.285-.375 0-.17.058-.352.174-.545.116-.194.275-.29.479-.29.172 0 .258.088.258.265 0 .139-.05.338-.149.596.367-.04.687-.32.961-.842l.228-.01c1.059-2.438.828-5.075-.83-6.732-1.019-1.02-2.408-1.5-3.895-1.471zm4.725 8.203a8.938 8.938 0 0 1-1.333 2.151 1.09 1.09 0 0 0-.012.147c0 .168.047.309.14.423.092.113.206.17.34.17.296 0 .714-.264 1.254-.787-.001.04-.003.08-.003.121 0 .146.012.368.036.666l.733-.172c0-.2.003-.357.01-.474.01-.157.033-.33.066-.517.02-.11.07-.216.152-.315l.186-.216a5.276 5.276 0 0 1 .378-.397c.062-.055.116-.099.162-.13a.26.26 0 0 1 .123-.046c.055 0 .083.035.083.106 0 .07-.052.236-.156.497-.194.486-.292.848-.292 1.084 0 .175.046.314.136.418a.45.45 0 0 0 .358.155c.365 0 .803-.269 1.313-.808v-.381c-.361.426-.623.64-.784.64-.109 0-.163-.067-.163-.2 0-.1.065-.316.195-.65.19-.486.285-.836.285-1.048a.464.464 0 0 0-.112-.319.36.36 0 0 0-.282-.127c-.165 0-.354.077-.567.233-.213.156-.5.436-.863.84.053-.262.165-.622.335-1.08l-.809.156a6.54 6.54 0 0 0-.399 1.074c-.04.156-.07.316-.092.48a7.447 7.447 0 0 1-.49.45.38.38 0 0 1-.229.08.208.208 0 0 1-.174-.082.352.352 0 0 1-.064-.222c0-.1.019-.214.056-.343.038-.13.12-.373.249-.731l.308-.849zm-17.21-2.927c-.863-.016-1.67.263-2.261.854-1.352 1.352-1.07 3.827.631 5.527 1.7 1.701 4.95 1.21 5.527.632.467-.466 1.07-3.827-.631-5.527-.957-.957-2.158-1.465-3.267-1.486zm12.285.358h.166v.21H15.4zm.427 0h.166v.865l.46-.455h.195l-.364.362.428.684h-.198l-.357-.575-.164.166v.41h-.166zm1.016 0h.166v.21h-.166zm.481.122h.166v.288h.172v.135h-.172v.717c0 .037.006.062.02.075.012.013.037.02.074.02a.23.23 0 0 0 .078-.01v.141a.802.802 0 0 1-.136.014.23.23 0 0 1-.15-.043.15.15 0 0 1-.052-.123v-.79h-.141v-.136h.141zm-3.562.258c.081 0 .15.012.207.038.057.024.1.061.13.11s.045.106.045.173h-.176c-.006-.111-.075-.167-.208-.167a.285.285 0 0 0-.164.041.134.134 0 0 0-.06.117c0 .035.015.065.045.088.03.024.08.044.15.06l.16.039a.47.47 0 0 1 .224.105c.047.046.07.108.07.186a.3.3 0 0 1-.052.175.327.327 0 0 1-.152.116.585.585 0 0 1-.226.041c-.136 0-.24-.03-.309-.088-.069-.059-.105-.149-.109-.269h.176c.004.037.01.065.017.084a.166.166 0 0 0 .034.054c.044.043.112.065.204.065a.31.31 0 0 0 .177-.045.139.139 0 0 0 .067-.119.116.116 0 0 0-.038-.09.287.287 0 0 0-.124-.055l-.156-.038a1.248 1.248 0 0 1-.159-.05.359.359 0 0 1-.098-.061.22.22 0 0 1-.058-.083.32.32 0 0 1-.016-.108c0-.096.036-.174.109-.232a.45.45 0 0 1 .29-.087zm1.035 0a.46.46 0 0 1 .202.043.351.351 0 0 1 .187.212.577.577 0 0 1 .023.126h-.168a.256.256 0 0 0-.078-.168.242.242 0 0 0-.17-.06.248.248 0 0 0-.155.05.306.306 0 0 0-.1.144.662.662 0 0 0-.034.224.58.58 0 0 0 .035.214.299.299 0 0 0 .101.135.261.261 0 0 0 .157.048c.142 0 .227-.084.256-.252h.167a.519.519 0 0 1-.065.22.35.35 0 0 1-.146.138.464.464 0 0 1-.216.048.448.448 0 0 1-.246-.066.441.441 0 0 1-.161-.192.703.703 0 0 1-.057-.293c0-.085.01-.163.032-.233a.522.522 0 0 1 .095-.182.403.403 0 0 1 .15-.117.453.453 0 0 1 .191-.04zm.603.03h.166v1.046H15.4zm1.443 0h.166v1.046h-.166zm-5.05.618c-.08 0-.2.204-.356.611-.155.407-.308.977-.459 1.71.281-.312.509-.662.683-1.05.175-.387.262-.72.262-.999a.455.455 0 0 0-.036-.197c-.025-.05-.056-.075-.093-.075zm4.662 1.797c-.221 0-.431.188-.629.563-.197.376-.296.722-.296 1.038 0 .12.029.216.088.29a.273.273 0 0 0 .223.111c.221 0 .43-.188.625-.565.196-.377.294-.725.294-1.043a.457.457 0 0 0-.083-.29.269.269 0 0 0-.222-.104zm-2.848.007c-.146 0-.285.11-.417.333-.133.222-.2.51-.2.866.566-.159.849-.452.849-.881 0-.212-.077-.318-.232-.318Z\"/></svg>", "LangChain": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#4fd1c5\" d=\"M13.796 0a6.93 6.93 0 0 0-4.91 2.019L5.451 5.455l3.273 3.27 3.432-3.432a2.284 2.284 0 0 1 3.277 0 2.28 2.28 0 0 1 0 3.275L12 12.001l3.273 3.273 3.433-3.435c2.692-2.692 2.692-7.127 0-9.82A6.92 6.92 0 0 0 13.796 0m-5.07 8.728-3.433 3.434c-2.692 2.693-2.692 7.126 0 9.819A6.92 6.92 0 0 0 10.203 24a6.93 6.93 0 0 0 4.911-2.02l3.432-3.432-3.271-3.272-3.433 3.433a2.284 2.284 0 0 1-3.277 0 2.28 2.28 0 0 1 0-3.276L12 12z\"/></svg>", "LangGraph": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"#4fd1c5\" stroke-width=\"1.6\"><circle cx=\"5\" cy=\"6\" r=\"2.4\"/><circle cx=\"19\" cy=\"6\" r=\"2.4\"/><circle cx=\"12\" cy=\"18\" r=\"2.4\"/><path d=\"M7.4 6h9.2M6.2 8l4.6 8M17.8 8l-4.6 8\"/></g></svg>", "RAG": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path d=\"M5 3h9l4 4v8\" fill=\"none\" stroke=\"#c778dd\" stroke-width=\"1.7\" stroke-linejoin=\"round\"/><path d=\"M5 3v17h6\" fill=\"none\" stroke=\"#c778dd\" stroke-width=\"1.7\"/><path d=\"M8 9h6M8 13h3\" stroke=\"#c778dd\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle cx=\"16\" cy=\"17\" r=\"3.2\" fill=\"none\" stroke=\"#c778dd\" stroke-width=\"1.7\"/><path d=\"M18.5 19.5L21 22\" stroke=\"#c778dd\" stroke-width=\"1.8\" stroke-linecap=\"round\"/></svg>", "FAISS": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><g fill=\"#0467df\"><circle cx=\"5\" cy=\"5\" r=\"1.3\"/><circle cx=\"10\" cy=\"5\" r=\"1.3\"/><circle cx=\"15\" cy=\"5\" r=\"1.3\"/><circle cx=\"5\" cy=\"10\" r=\"1.3\"/><circle cx=\"10\" cy=\"10\" r=\"1.3\"/><circle cx=\"5\" cy=\"15\" r=\"1.3\"/></g><circle cx=\"15\" cy=\"14\" r=\"4\" fill=\"none\" stroke=\"#0467df\" stroke-width=\"1.8\"/><path d=\"M18 17l3.5 3.5\" stroke=\"#0467df\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "ChromaDB": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"12\" r=\"6\" fill=\"#327eff\" opacity=\".9\"/><circle cx=\"15\" cy=\"12\" r=\"6\" fill=\"#ffde2d\" opacity=\".85\"/><path d=\"M12 7.2a6 6 0 0 1 0 9.6a6 6 0 0 1 0-9.6z\" fill=\"#ff6446\"/></svg>", "FastAPI": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#009688\" d=\"M12 .0387C5.3729.0384.0003 5.3931 0 11.9988c-.001 6.6066 5.372 11.9628 12 11.9625 6.628.0003 12.001-5.3559 12-11.9625-.0003-6.6057-5.3729-11.9604-12-11.96m-.829 5.4153h7.55l-7.5805 5.3284h5.1828L5.279 18.5436q2.9466-6.5444 5.892-13.0896\"/></svg>", "Ollama": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#ffffff\" d=\"M16.361 10.26a.894.894 0 0 0-.558.47l-.072.148.001.207c0 .193.004.217.059.353.076.193.152.312.291.448.24.238.51.3.872.205a.86.86 0 0 0 .517-.436.752.752 0 0 0 .08-.498c-.064-.453-.33-.782-.724-.897a1.06 1.06 0 0 0-.466 0zm-9.203.005c-.305.096-.533.32-.65.639a1.187 1.187 0 0 0-.06.52c.057.309.31.59.598.667.362.095.632.033.872-.205.14-.136.215-.255.291-.448.055-.136.059-.16.059-.353l.001-.207-.072-.148a.894.894 0 0 0-.565-.472 1.02 1.02 0 0 0-.474.007Zm4.184 2c-.131.071-.223.25-.195.383.031.143.157.288.353.407.105.063.112.072.117.136.004.038-.01.146-.029.243-.02.094-.036.194-.036.222.002.074.07.195.143.253.064.052.076.054.255.059.164.005.198.001.264-.03.169-.082.212-.234.15-.525-.052-.243-.042-.28.087-.355.137-.08.281-.219.324-.314a.365.365 0 0 0-.175-.48.394.394 0 0 0-.181-.033c-.126 0-.207.03-.355.124l-.085.053-.053-.032c-.219-.13-.259-.145-.391-.143a.396.396 0 0 0-.193.032zm.39-2.195c-.373.036-.475.05-.654.086-.291.06-.68.195-.951.328-.94.46-1.589 1.226-1.787 2.114-.04.176-.045.234-.045.53 0 .294.005.357.043.524.264 1.16 1.332 2.017 2.714 2.173.3.033 1.596.033 1.896 0 1.11-.125 2.064-.727 2.493-1.571.114-.226.169-.372.22-.602.039-.167.044-.23.044-.523 0-.297-.005-.355-.045-.531-.288-1.29-1.539-2.304-3.072-2.497a6.873 6.873 0 0 0-.855-.031zm.645.937a3.283 3.283 0 0 1 1.44.514c.223.148.537.458.671.662.166.251.26.508.303.82.02.143.01.251-.043.482-.08.345-.332.705-.672.957a3.115 3.115 0 0 1-.689.348c-.382.122-.632.144-1.525.138-.582-.006-.686-.01-.853-.042-.57-.107-1.022-.334-1.35-.68-.264-.28-.385-.535-.45-.946-.03-.192.025-.509.137-.776.136-.326.488-.73.836-.963.403-.269.934-.46 1.422-.512.187-.02.586-.02.773-.002zm-5.503-11a1.653 1.653 0 0 0-.683.298C5.617.74 5.173 1.666 4.985 2.819c-.07.436-.119 1.04-.119 1.503 0 .544.064 1.24.155 1.721.02.107.031.202.023.208a8.12 8.12 0 0 1-.187.152 5.324 5.324 0 0 0-.949 1.02 5.49 5.49 0 0 0-.94 2.339 6.625 6.625 0 0 0-.023 1.357c.091.78.325 1.438.727 2.04l.13.195-.037.064c-.269.452-.498 1.105-.605 1.732-.084.496-.095.629-.095 1.294 0 .67.009.803.088 1.266.095.555.288 1.143.503 1.534.071.128.243.393.264.407.007.003-.014.067-.046.141a7.405 7.405 0 0 0-.548 1.873c-.062.417-.071.552-.071.991 0 .56.031.832.148 1.279L3.42 24h1.478l-.05-.091c-.297-.552-.325-1.575-.068-2.597.117-.472.25-.819.498-1.296l.148-.29v-.177c0-.165-.003-.184-.057-.293a.915.915 0 0 0-.194-.25 1.74 1.74 0 0 1-.385-.543c-.424-.92-.506-2.286-.208-3.451.124-.486.329-.918.544-1.154a.787.787 0 0 0 .223-.531c0-.195-.07-.355-.224-.522a3.136 3.136 0 0 1-.817-1.729c-.14-.96.114-2.005.69-2.834.563-.814 1.353-1.336 2.237-1.475.199-.033.57-.028.776.01.226.04.367.028.512-.041.179-.085.268-.19.374-.431.093-.215.165-.333.36-.576.234-.29.46-.489.822-.729.413-.27.884-.467 1.352-.561.17-.035.25-.04.569-.04.319 0 .398.005.569.04a4.07 4.07 0 0 1 1.914.997c.117.109.398.457.488.602.034.057.095.177.132.267.105.241.195.346.374.43.14.068.286.082.503.045.343-.058.607-.053.943.016 1.144.23 2.14 1.173 2.581 2.437.385 1.108.276 2.267-.296 3.153-.097.15-.193.27-.333.419-.301.322-.301.722-.001 1.053.493.539.801 1.866.708 3.036-.062.772-.26 1.463-.533 1.854a2.096 2.096 0 0 1-.224.258.916.916 0 0 0-.194.25c-.054.109-.057.128-.057.293v.178l.148.29c.248.476.38.823.498 1.295.253 1.008.231 2.01-.059 2.581a.845.845 0 0 0-.044.098c0 .006.329.009.732.009h.73l.02-.074.036-.134c.019-.076.057-.3.088-.516.029-.217.029-1.016 0-1.258-.11-.875-.295-1.57-.597-2.226-.032-.074-.053-.138-.046-.141.008-.005.057-.074.108-.152.376-.569.607-1.284.724-2.228.031-.26.031-1.378 0-1.628-.083-.645-.182-1.082-.348-1.525a6.083 6.083 0 0 0-.329-.7l-.038-.064.131-.194c.402-.604.636-1.262.727-2.04a6.625 6.625 0 0 0-.024-1.358 5.512 5.512 0 0 0-.939-2.339 5.325 5.325 0 0 0-.95-1.02 8.097 8.097 0 0 1-.186-.152.692.692 0 0 1 .023-.208c.208-1.087.201-2.443-.017-3.503-.19-.924-.535-1.658-.98-2.082-.354-.338-.716-.482-1.15-.455-.996.059-1.8 1.205-2.116 3.01a6.805 6.805 0 0 0-.097.726c0 .036-.007.066-.015.066a.96.96 0 0 1-.149-.078A4.857 4.857 0 0 0 12 3.03c-.832 0-1.687.243-2.456.698a.958.958 0 0 1-.148.078c-.008 0-.015-.03-.015-.066a6.71 6.71 0 0 0-.097-.725C8.997 1.392 8.337.319 7.46.048a2.096 2.096 0 0 0-.585-.041Zm.293 1.402c.248.197.523.759.682 1.388.03.113.06.244.069.292.007.047.026.152.041.233.067.365.098.76.102 1.24l.002.475-.12.175-.118.178h-.278c-.324 0-.646.041-.954.124l-.238.06c-.033.007-.038-.003-.057-.144a8.438 8.438 0 0 1 .016-2.323c.124-.788.413-1.501.696-1.711.067-.05.079-.049.157.013zm9.825-.012c.17.126.358.46.498.888.28.854.36 2.028.212 3.145-.019.14-.024.151-.057.144l-.238-.06a3.693 3.693 0 0 0-.954-.124h-.278l-.119-.178-.119-.175.002-.474c.004-.669.066-1.19.214-1.772.157-.623.434-1.185.68-1.382.078-.062.09-.063.159-.012z\"/></svg>", "Pandas": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#e70488\" d=\"M16.922 0h2.623v18.104h-2.623zm-4.126 12.94h2.623v2.57h-2.623zm0-7.037h2.623v5.446h-2.623zm0 11.197h2.623v5.446h-2.623zM4.456 5.896h2.622V24H4.455zm4.213 2.559h2.623v2.57H8.67zm0 4.151h2.623v5.447H8.67zm0-11.187h2.623v5.446H8.67Z\"/></svg>", "NumPy": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#4dabcf\" d=\"M10.315 4.876L6.3048 2.8517l-4.401 2.1965 4.1186 2.0683zm1.8381.9277l4.2045 2.1223-4.3622 2.1906-4.125-2.0718zm5.6153-2.9213l4.3193 2.1658-3.863 1.9402-4.2131-2.1252zm-1.859-.9329L12.021 0 8.1742 1.9193l4.0068 2.0208zm-3.0401 16.7443V24l4.7107-2.3507-.0053-5.3085zm4.7037-4.2057l-.0052-5.2528-4.6985 2.3356v5.2546zm5.6553-.9845v5.327l-4.0178 2.0052-.0029-5.3028zm0-1.8626V6.4214l-4.0253 2.001.0034 5.2633zM11.2062 11.571L8.0333 9.9756v6.895s-3.8804-8.2564-4.2399-8.998c-.0463-.0957-.2371-.2007-.2858-.2262C2.8118 7.2812.773 6.2485.773 6.2485V18.43l2.8204 1.5076v-6.3674s3.8392 7.3775 3.878 7.458c.0389.0807.4245.8582.8362 1.1314.5485.363 2.8992 1.7766 2.8992 1.7766z\"/></svg>", "SQL / MySQL": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#4479A1\" d=\"M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08c-.378 2.045-.876 3.533-1.492 4.46-.482.716-1.01 1.073-1.583 1.073-.153 0-.34-.046-.566-.138v-.494c.11.017.24.026.386.026.268 0 .483-.075.647-.222.197-.18.295-.382.295-.605 0-.155-.077-.47-.23-.944L6.23 14.615h.91l.727 2.36c.164.536.233.91.205 1.123.4-1.064.678-2.227.835-3.483zm12.325 4.08h-2.63v-5.53h.885v4.85h1.745zm-3.32.135l-1.016-.5c.09-.076.177-.158.255-.25.433-.506.648-1.258.648-2.253 0-1.83-.718-2.746-2.155-2.746-.704 0-1.254.232-1.65.697-.43.508-.646 1.256-.646 2.245 0 .972.19 1.686.574 2.14.35.41.877.615 1.583.615.264 0 .506-.033.725-.098l1.325.772.36-.622zM15.5 17.588c-.225-.36-.337-.94-.337-1.736 0-1.393.424-2.09 1.27-2.09.443 0 .77.167.977.5.224.362.336.936.336 1.723 0 1.404-.424 2.108-1.27 2.108-.445 0-.77-.167-.978-.5zm-1.658-.425c0 .47-.172.856-.516 1.156-.344.3-.803.45-1.384.45-.543 0-1.064-.172-1.573-.515l.237-.476c.438.22.833.328 1.19.328.332 0 .593-.073.783-.22a.754.754 0 00.3-.615c0-.33-.23-.61-.648-.845-.388-.213-1.163-.657-1.163-.657-.422-.307-.632-.636-.632-1.177 0-.45.157-.81.47-1.085.315-.278.72-.415 1.22-.415.512 0 .98.136 1.4.41l-.213.476a2.726 2.726 0 00-1.064-.23c-.283 0-.502.068-.654.206a.685.685 0 00-.248.524c0 .328.234.61.666.85.393.215 1.187.67 1.187.67.433.305.648.63.648 1.168zm9.382-5.852c-.535-.014-.95.04-1.297.188-.1.04-.26.04-.274.167.055.053.063.14.11.214.08.134.218.313.346.407.14.11.28.216.427.31.26.16.555.255.81.416.145.094.293.213.44.313.073.05.12.14.214.172v-.02c-.046-.06-.06-.147-.105-.214-.067-.067-.134-.127-.2-.193a3.223 3.223 0 00-.695-.675c-.214-.146-.682-.35-.77-.595l-.013-.014c.146-.013.32-.066.46-.106.227-.06.435-.047.67-.106.106-.027.213-.06.32-.094v-.06c-.12-.12-.21-.283-.334-.395a8.867 8.867 0 00-1.104-.823c-.21-.134-.476-.22-.697-.334-.08-.04-.214-.06-.26-.127-.12-.146-.19-.34-.275-.514a17.69 17.69 0 01-.547-1.163c-.12-.262-.193-.523-.34-.763-.69-1.137-1.437-1.826-2.586-2.5-.247-.14-.543-.2-.856-.274-.167-.008-.334-.02-.5-.027-.11-.047-.216-.174-.31-.235-.38-.24-1.364-.76-1.644-.072-.18.434.267.862.422 1.082.115.153.26.328.34.5.047.116.06.235.107.356.106.294.207.622.347.897.073.14.153.287.247.413.054.073.146.107.167.227-.094.136-.1.334-.154.5-.24.757-.146 1.693.194 2.25.107.166.362.534.703.393.3-.12.234-.5.32-.835.02-.08.007-.133.048-.187v.015c.094.188.188.367.274.555.206.328.566.668.867.895.16.12.287.328.487.402v-.02h-.015c-.043-.058-.1-.086-.154-.133a3.445 3.445 0 01-.35-.4 8.76 8.76 0 01-.747-1.218c-.11-.21-.202-.436-.29-.643-.04-.08-.04-.2-.107-.24-.1.146-.247.273-.32.453-.127.288-.14.642-.188 1.01-.027.007-.014 0-.027.014-.214-.052-.287-.274-.367-.46-.2-.475-.233-1.238-.06-1.785.047-.14.247-.582.167-.716-.042-.127-.174-.2-.247-.303a2.478 2.478 0 01-.24-.427c-.16-.374-.24-.788-.414-1.162-.08-.173-.22-.354-.334-.513-.127-.18-.267-.307-.368-.52-.033-.073-.08-.194-.027-.274.014-.054.042-.075.094-.09.088-.072.335.022.422.062.247.1.455.194.662.334.094.066.195.193.315.226h.14c.214.047.455.014.655.073.355.114.675.28.962.46a5.953 5.953 0 012.085 2.286c.08.154.115.295.188.455.14.33.313.663.455.982.14.315.275.636.476.897.1.14.502.213.682.286.133.06.34.115.46.188.23.14.454.3.67.454.11.076.443.243.463.378z\"/></svg>", "Git / GitHub": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path fill=\"#F03C2E\" d=\"M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z\"/></svg>", "AWS": "<svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" aria-hidden=\"true\"><path d=\"M3 15.5c5 3 13 3 18 0\" fill=\"none\" stroke=\"#ff9900\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><path d=\"M18 14.2l3.2 1.3-1.2 3\" fill=\"none\" stroke=\"#ff9900\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"12\" y=\"12\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-weight=\"700\" font-size=\"9.5\" fill=\"currentColor\">aws</text></svg>"};
+const skills=Object.keys(ICONS);
+skills.forEach(n=>{
+  const d=document.createElement('div');d.className='tile';
+  d.innerHTML=ICONS[n];
+  const sp=document.createElement('span');sp.textContent=n;d.append(sp);$('#tiles').append(d);
+});
+
+/* typing */
+const phrases=['multi-agent automation','RAG with traceable answers','prompt tooling','quality-gated LLM output'];
+const typed=$('#typed');
+if(reduce){typed.textContent=phrases[0]}else{
+  let i=0,j=0,del=false;
+  (function tick(){
+    const w=phrases[i]; typed.textContent=w.slice(0,j);
+    if(!del&&j===w.length){del=true;return setTimeout(tick,1800)}
+    if(del&&j===0){del=false;i=(i+1)%phrases.length}
+    j+=del?-1:1; setTimeout(tick,del?28:60);
+  })();
+}
+
+/* certs */
+CONFIG.certs.forEach(c=>{
+  const li=document.createElement('li');
+  const el=document.createElement(c.url?'a':'div');
+  if(c.url){el.href=c.url;el.target='_blank';el.rel='noopener'}else el.className='c2';
+  const l=document.createElement('span');l.textContent=c.name+' ';
+  const sm=document.createElement('small');sm.textContent='· '+c.issuer;l.append(sm);el.append(l);
+  if(c.url){const g=document.createElement('span');g.className='go';g.textContent='view ↗';el.append(g)}
+  li.append(el);$('#certList').append(li);
+});
+
+/* leetcode */
+const LC=CONFIG.leetcode;
+if(LC.user){
+  const url='https://leetcode.com/u/'+encodeURIComponent(LC.user);
+  [$('#lcBtn'),$('#railLc')].forEach(a=>{a.href=url;a.hidden=false});
+  $('#lcText').textContent='leetcode.com/u/'+LC.user;$('#lcLink').href=url;
+  if(LC.solved){
+    $('#lcCard').hidden=false;$('#lcSolved').textContent=LC.solved;
+    const mx=Math.max(LC.easy,LC.medium,LC.hard,1);
+    $('#lcBars').innerHTML=[['easy',LC.easy],['medium',LC.medium],['hard',LC.hard]].map(([n,v])=>
+      '<div class="bar-r"><span>'+n+'</span><div><i style="width:'+Math.round(v/mx*100)+'%"></i></div><span>'+v+'</span></div>').join('');
+  }
+}
+if($('#lcCard').hidden)$('.duo').style.gridTemplateColumns='1fr';
+
+/* reveal + spy */
+const rv=$$('.rv');
+if('IntersectionObserver' in window && !reduce){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+  rv.forEach(el=>io.observe(el));
+}else rv.forEach(el=>el.classList.add('in'));
+const navLinks=$$('.links a');
+if('IntersectionObserver' in window){
+  const spy=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+  }),{rootMargin:'-45% 0px -50% 0px'});
+  $$('main section').forEach(s=>spy.observe(s));
+}
+
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),1800)}
+const EMAIL='nagasaiparaksh@gmail.com';
+function copyEmail(){try{navigator.clipboard.writeText(EMAIL).then(()=>toast('email copied'),()=>toast(EMAIL))}catch(e){toast(EMAIL)}}
+$('#copyMail').onclick=copyEmail;
+
+/* command palette */
+const go=id=>()=>{closePal();document.getElementById(id).scrollIntoView({behavior:reduce?'auto':'smooth'})};
+const open=url=>()=>{closePal();window.open(url,'_blank','noopener')};
+const cmds=[
+  {l:'Go to Projects',h:'section',run:go('projects')},
+  {l:'Go to Experience',h:'section',run:go('experience')},
+  {l:'Go to Research',h:'section',run:go('research')},
+  {l:'Go to Skills',h:'section',run:go('skills')},
+  {l:'Go to About',h:'section',run:go('about')},
+  {l:'Go to Contacts',h:'section',run:go('contact')},
+  {l:'Open GitHub',h:'link',run:open('https://github.com/nagasaiparaksh')},
+  {l:'Open LinkedIn',h:'link',run:open('https://linkedin.com/in/nagasaiparaksh')},
+  ...(LC.user?[{l:'Open LeetCode',h:'link',run:open('https://leetcode.com/u/'+encodeURIComponent(LC.user))}]:[]),
+  {l:'Open resume (PDF)',h:'link',run:open('https://drive.google.com/file/d/1crU9QvTZEbWiPV8KwsoHubkrKpnWQCfv/view?usp=drive_link')},
+  {l:'Copy email address',h:'action',run:()=>{closePal();copyEmail()}},
+  {l:'Toggle light / dark theme',h:'action',run:()=>{closePal();$('#themeBtn').click()}},
+];
+const pal=$('#pal'), inp=$('#palIn'), list=$('#palList');
+let shown=cmds, sel=0, lastFocus=null;
+function render(){
+  list.textContent='';
+  if(!shown.length){const d=document.createElement('div');d.className='none';d.textContent='No matches';list.append(d);return}
+  shown.forEach((c,i)=>{
+    const li=document.createElement('li');li.setAttribute('role','option');li.setAttribute('aria-selected',String(i===sel));
+    li.append(document.createTextNode(c.l));const s=document.createElement('span');s.textContent=c.h;li.append(s);
+    li.onclick=c.run;li.onmouseenter=()=>{sel=i;$$('li',list).forEach((x,k)=>x.setAttribute('aria-selected',String(k===i)))};
+    list.append(li);
+  });
+}
+function openPal(){lastFocus=document.activeElement;pal.classList.add('open');inp.value='';shown=cmds;sel=0;render();inp.focus()}
+function closePal(){pal.classList.remove('open');if(lastFocus)lastFocus.focus()}
+inp.oninput=()=>{const q=inp.value.toLowerCase().trim();shown=cmds.filter(c=>c.l.toLowerCase().includes(q)||c.h.includes(q));sel=0;render()};
+inp.onkeydown=e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,shown.length-1);render();$$('li',list)[sel]?.scrollIntoView({block:'nearest'})}
+  else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);render();$$('li',list)[sel]?.scrollIntoView({block:'nearest'})}
+  else if(e.key==='Enter'){e.preventDefault();shown[sel]&&shown[sel].run()}
+  else if(e.key==='Escape'){closePal()}
+};
+pal.onclick=e=>{if(e.target===pal)closePal()};
+$('#palBtn').onclick=openPal;
+document.addEventListener('keydown',e=>{
+  const typing=/^(input|textarea)$/i.test(document.activeElement.tagName);
+  if(!typing&&e.key==='/'&&!e.metaKey&&!e.ctrlKey){e.preventDefault();openPal()}
+  else if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('open')?closePal():openPal()}
+});
+</script>
+</body>
+</html>
